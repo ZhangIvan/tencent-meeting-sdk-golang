@@ -36,6 +36,24 @@ type Settings struct {
 	LiveUrl          bool `json:"live_url,omitempty"`          // 开启直播, 暂时不支持。
 }
 
+// 直播配置
+type LiveConfig struct {
+	LiveSubject        string `json:"live_subject,omitempty"`         // 直播主题，开启之后。
+	LiveSummary        string `json:"live_summary,omitempty"`         // 直播简介。
+	EnableLivePassword bool   `json:"enable_live_password,omitempty"` // 是否开启直播密码，默认值为 false。
+	LivePassword       string `json:"live_password,omitempty"`        // 直播密码。当设置开启直播密码时，该参数必填。
+	EnableLiveIm       bool   `json:"enable_live_im,omitempty"`       // 允许观众讨论，默认值为 false。
+	EnableLiveReplay   bool   `json:"enable_live_replay,omitempty"`   // 开启直播回看，默认值为 false。
+}
+
+// 周期性会议
+type RecurringRule struct {
+	RecurringType int `json:"recurring_type,omitempty"` // 重复类型，默认值为0。 0：每天 1：每个工作日 2：每周 3：每两周 4：每月
+	UntilType     int `json:"until_type,omitempty"`     // 结束重复类型，默认值为0。 0：按日期结束重复 1：按次数结束重复
+	UntilDate     int `json:"until_date,omitempty"`     // 结束日期时间戳，默认值为当前日期 + 7天。 最大支持预定50场子会议。
+	UntilCount    int `json:"until_count,omitempty"`    // 限定会议次数（1-50次），默认值为7次。
+}
+
 // 用户信息
 type UserInfo struct {
 	Email    string `json:"email" binding:"required"`    // 邮箱地址
