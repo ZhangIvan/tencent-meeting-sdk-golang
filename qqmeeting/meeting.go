@@ -152,10 +152,11 @@ type MeetingQueryParticipantsResponse struct {
 	ScheduleStartTime string                 `json:"schedule_start_time"` // 预定会议开始时间戳（单位秒）
 	ScheduleEndTime   string                 `json:"schedule_end_time"`   // 预定会议结束时间戳（单位秒）
 	Participants      []*MeetingParticipants `json:"participants"`        // 参会人员对象数组。
-	HasRemaining      bool                   `json:"has_remaining"`
+	HasRemaining      bool                   `json:"has_remaining"`       // 是否还有未拉取的数据。
+	NextPos           int                    `json:"next_pos"`            // 和“has_remaining”一起，数据量比较大的情况下支持参会成员列表的多次获取。
 }
 
-// 获取某指定用户的会议列表
+// MeetingQueryUserMeetingListRequest 获取某指定用户的会议列表
 type MeetingQueryUserMeetingListRequest struct {
 	UserID     string `query:"userid"`
 	InstanceID int    `query:"instanceid"`
