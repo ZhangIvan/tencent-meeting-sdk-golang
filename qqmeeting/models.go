@@ -43,9 +43,9 @@ type Settings struct {
 	PlayIVROnJoin              bool   `json:"play_ivr_on_join,omitempty"`              // 有新的入会者加入时播放提示音。
 	LiveUrl                    bool   `json:"live_url,omitempty"`                      // 开启直播, 暂时不支持。
 	AutoInWaitingRoom          bool   `json:"auto_in_waiting,omitempty"`               // 参会者离开时播放提示音，暂时不支持，可在客户端设置。
-	AllowInBeforeHost          bool   `json:"allow_in_before_host,omitempty"`          // 是否允许成员在主持人进会前加入会议，默认值为 true。 true：允许 false：不允许
+	AllowInBeforeHost          bool   `json:"allow_in_before_host"`                    // 是否允许成员在主持人进会前加入会议，默认值为 true。 true：允许 false：不允许
 	AllowScreenSharedWatermark bool   `json:"allow_screen_shared_watermark,omitempty"` // 是否开启屏幕共享水印，默认值为 false。true： 开启false：不开启
-	OnlyEnterpriseUserAllowed  bool   `json:"only_enterprise_user_allowed,omitempty"`  // 是否仅企业内部成员可入会，默认值为 false。 true：仅企业内部用户可入会 false：所有人可入会
+	OnlyEnterpriseUserAllowed  bool   `json:"only_enterprise_user_allowed"`            // 是否仅企业内部成员可入会，默认值为 false。 true：仅企业内部用户可入会 false：所有人可入会
 	ParticipantJoinAutoRecord  bool   `json:"participant_join_auto_record,omitempty"`  // 当有嘉宾入会时立即开启云录制，默认值为 false 关闭，关闭时，主持人入会自动开启云录制；当设置为开启时，则有嘉宾入会自动开启云录制。 说明： 该参数必须 auto_record_type 设置为“cloud”时才生效，该参数依赖企业账户设置，当企业强制锁定后，该参数必须与企业配置保持一致。 仅客户端2.7及以上版本生效。
 	EnableHostPauseAutoRecord  bool   `json:"enable_host_pause_auto_record,omitempty"` // 允许主持人暂停或者停止云录制，默认值为 true 开启，开启时，主持人允许暂停和停止云录制；当设置为关闭时，则主持人不允许暂停和关闭云录制。 说明： 该参数必须 auto_record_type 设置为“cloud”时才生效，该参数依赖企业账户设置，当企业强制锁定后，该参数必须与企业配置保持一致。 仅客户端2.7及以上版本生效。
 	WaterMarkType              int    `json:"watermark_type,omitempty"`                // 水印样式，默认为单排。当屏幕共享水印参数为开启时，此参数才生效。 0：单排 1：多排

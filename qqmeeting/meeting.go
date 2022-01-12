@@ -1,6 +1,6 @@
 package qqmeeting
 
-// 创建会议
+// MeetingCreateRequest 创建会议
 type MeetingCreateRequest struct {
 	UserID        string         `json:"userid"`                   // 调用方用于标示用户的唯一 ID
 	InstanceID    int            `json:"instanceid"`               // 用户的终端设备类型
@@ -33,7 +33,7 @@ type MeetingCreateResponse struct {
 	MeetingCreationInfo []*MeetingInfo `json:"meeting_info_list"` // 预约会议列表
 }
 
-// 通过会议ID获取会议信息
+// MeetingQueryByIDRequest 通过会议ID获取会议信息
 type MeetingQueryByIDRequest struct {
 	MeetingID  string `param:"meeting_id"`
 	UserID     string `query:"userid"`
@@ -48,8 +48,7 @@ func (req MeetingQueryByIDRequest) fillPlaceholder(args ...interface{}) string {
 	return defaultPlaceholderFiller(req, args...)
 }
 
-// 通过Code获取会议信息
-//
+// MeetingQueryByCodeRequest 通过Code获取会议信息
 // BUG(hafrans) 腾讯会议API接口报错，不知道什么问题，本地HTTP抓包未发现异常。
 type MeetingQueryByCodeRequest struct {
 	MeetingCode string `json:"-" query:"meeting_code"`
@@ -72,7 +71,7 @@ type MeetingQueryResponse struct {
 	MeetingInfoList []*MeetingQueryInfo `json:"meeting_info_list"` // 会议列表
 }
 
-// 取消会议
+// MeetingCancelRequest 取消会议
 type MeetingCancelRequest struct {
 	MeetingID    string `json:"-" param:"meeting_id"`     // 会议的唯一 ID。
 	UserID       string `json:"userid"`                   // 调用方用于标示用户的唯一 ID

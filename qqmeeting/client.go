@@ -24,7 +24,7 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-// Describe A Request
+// MeetingRequestDescriptor Describe A Request
 type MeetingRequestDescriptor struct {
 	Url    string
 	Method string
@@ -70,7 +70,7 @@ type Meeting struct {
 	Registered int    // 企业用户管理，最好开，否则主持人的功能用不了
 }
 
-// RequestBody Descriptor
+// Request RequestBody Descriptor
 type Request struct {
 	Method        string
 	URL           *url.URL
@@ -155,9 +155,9 @@ func serializeHeader(request *Request) string {
 	return buf.String()
 }
 
-func fillHeader(req *Request, header *http.Header) () {
+func fillHeader(req *Request, header *http.Header) {
 
-	callback := func(n, v string) () {
+	callback := func(n, v string) {
 		//fmt.Printf("%s:%s\n", n, v)
 		(*header)[n] = []string{v}
 	}
@@ -178,7 +178,7 @@ func fillSignature(req *Request) {
 	req.Signature = base64.StdEncoding.EncodeToString([]byte(hex.EncodeToString(result)))
 }
 
-func fillFields(req *Request, callback func(name, value string) ()) {
+func fillFields(req *Request, callback func(name, value string)) {
 	ref := reflect.ValueOf(*req)
 	typ := reflect.TypeOf(*req)
 
@@ -259,7 +259,9 @@ func (meeting Meeting) Do(req MeetingRequest) (MeetingResponse, error) {
 		reqBody = string(body)
 	}
 
-	hReq, err := NewRequest(method, ApiHost+req.fillPlaceholder(params...)+urlAppendix.String(), reqBody, meeting)
+	tencentUrl := ApiHost + req.fillPlaceholder(params...) + urlAppendix.String()
+	hReq, err := NewRequest(method, tencentUrl, reqBody, meeting)
+	//fmt.Printf("req method = %s, url=%s, body :%#v\n", method, tencentUrl, reqBody)
 	if err != nil {
 		log.Println(err)
 		return nil, err
